@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EstudosController;
+use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\UsuarioController;
 
 /*
@@ -29,6 +30,22 @@ Route::prefix('/estudos')->group(function () {
     });
 
     Route::get('/users', [UsuarioController::class, 'index']);
+    Route::post('/users', [UsuarioController::class, 'index']);
+
+    // Grupo de rotas das tarefas
+    Route::prefix('/tarefas')->group(function () {
+        Route::get('/', [TarefasController::class, 'list']); // Listagem de tarefas
+
+        Route::get('add', [TarefasController::class, 'create']); // Tela de Adição
+        Route::post('add', [TarefasController::class, 'store']); // Ação de Adição
+
+        Route::get('/edit/{id}', [TarefasController::class, 'edit']); // Tela de Edição
+        Route::post('/edit/{id}', [TarefasController::class, 'update']); // Ação de Edição
+
+        Route::get('/delete/{id}', [TarefasController::class, 'delete']); // Ação de Exclusão
+
+        Route::get('/marcar/{id}', [TarefasControlelr::class, 'done']); // Marcar Resolvido Sim/Não
+    });
 });
 
 // Fallback de rotas

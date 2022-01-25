@@ -9,6 +9,8 @@ class UsuarioController extends Controller
 {
     public function index(Request $request)
     {
-        return view('usuario');
+        $data = $request->all();
+
+        return view('Usuario.usuario');
     }
 }
